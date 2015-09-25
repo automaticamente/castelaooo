@@ -35,11 +35,11 @@ var getPermalink = function(tweet) {
 console.log(track);
 
 stream.on('disconnect', function() {
-    console.log('DISconnected from stream');
+    console.log('Disconnected from stream');
 });
 
 stream.on('limit', function() {
-    console.log('stream limited');
+    console.log('Stream limited');
 });
 
 stream.on('tweet', function(tweet) {
@@ -66,7 +66,7 @@ var tweet = function(t) {
         }
 
         var params = {
-            status: 'Castelaooo',
+            status: '@' + t.name + ' Castelaooo',
             in_reply_to_status_id: t.id,
             media_ids: [data.media_id_string]
         };
@@ -103,7 +103,7 @@ var getNext = function() {
                     client.expire('@' + currentTweet.name, 3600);
                 } else {
                     console.log('--');
-                    console.log('Usuario bloqueado por unha hora');
+                    console.log('User blocked for 1 hour');
                     console.log('--');
                 }
             });
