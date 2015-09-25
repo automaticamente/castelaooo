@@ -66,7 +66,7 @@ var tweet = function(t) {
         }
 
         var params = {
-            status: '@' + t.name + ' Castelaooo',
+            status: '.@' + t.name + ' Castelaooo',
             in_reply_to_status_id: t.id,
             media_ids: [data.media_id_string]
         };
