@@ -75,7 +75,7 @@ var tweet = function(t) {
             if (error) {
                 console.log(error);
             }
-            console.log(data);
+            console.log('Done.');
         });
     });
 };
