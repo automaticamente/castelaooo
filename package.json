@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/bertez/castelaooo#readme",
   "dependencies": {
-    "twit": "^2.1.0",
-    "underscore": "^1.8.3"
+    "redis": "^2.0.1",
+    "string": "^3.3.1",
+    "twit": "^2.1.0"
   }
 }
