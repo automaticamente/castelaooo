@@ -43,7 +43,7 @@ stream.on('limit', function() {
 });
 
 stream.on('tweet', function(tweet) {
-    if (!tweet.retweeted_status && S(tweet.text.toLowerCase()).contains(track)) {
+    if (!tweet.retweeted_status && S(tweet.text.toLowerCase()).contains(track.toLowerCase())) {
         var reply = {
             name: tweet.user.screen_name,
             id: tweet.id_str,
