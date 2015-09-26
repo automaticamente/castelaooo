@@ -43,7 +43,7 @@ stream.on('limit', function() {
 });
 
 stream.on('tweet', function(tweet) {
-    if (!tweet.retweeted_status && S(tweet.text).contains(track)) {
+    if (!tweet.retweeted_status && S(tweet.text.toLowerCase()).contains(track)) {
         var reply = {
             name: tweet.user.screen_name,
             id: tweet.id_str,
@@ -125,4 +125,4 @@ setInterval(function() {
             console.log('Queue empty.');
         }
     });
-}, 1000 * 60 * 2.5);
+}, 1000 * 60 * 2);
