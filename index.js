@@ -71,7 +71,7 @@ var tweet = function(t) {
             media_ids: [data.media_id_string]
         };
 
-        Twitter.post('statuses/update', params, function(err, data) {
+        Twitter.post('statuses/update', params, function(error, data) {
             if (error) {
                 console.log(error);
             }
