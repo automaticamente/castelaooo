@@ -100,10 +100,10 @@ var getNext = function() {
                     tweet(currentTweet);
 
                     client.set('@' + currentTweet.name, '1');
-                    client.expire('@' + currentTweet.name, 3600);
+                    client.expire('@' + currentTweet.name, 3600 * 12);
                 } else {
                     console.log('--');
-                    console.log('User blocked for 1 hour');
+                    console.log('User blocked for 12 hours');
                     console.log('--');
                 }
             });
