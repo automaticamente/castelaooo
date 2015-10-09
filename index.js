@@ -44,15 +44,31 @@ stream.on('limit', function() {
 
 stream.on('tweet', function(tweet) {
     if (!tweet.retweeted_status && S(tweet.text.toLowerCase()).contains(track.toLowerCase())) {
-        var reply = {
-            name: tweet.user.screen_name,
-            id: tweet.id_str,
-            id_user: tweet.user.id_str
-        };
 
-        console.log('Pushing to queue:', getPermalink(tweet));
+        client.exists('@' + tweet.user.screen_name, function(error, exists) {
+            if (error) {
+                console.log(error);
+            }
 
-        client.rpush('queue', JSON.stringify(reply));
+            if (!exists) {
+                console.log('Pushing to queue:', getPermalink(tweet));
+
+                client.rpush('queue', JSON.stringify({
+                    name: tweet.user.screen_name,
+                    id: tweet.id_str,
+                    id_user: tweet.user.id_str
+                }));
+
+                client.set('@' + tweet.user.screen_name, '1');
+                client.expire('@' + tweet.user.screen_name, 3600 * 24 * 7);
+            } else {
+                console.log('--');
+                console.log('User blocked for 7 days');
+                console.log('--');
+            }
+        });
+
+
     }
 });
 
@@ -88,25 +104,8 @@ var getNext = function() {
 
         if (reply) {
             var currentTweet = JSON.parse(reply);
+            tweet(currentTweet);
 
-            client.exists('@' + currentTweet.name, function(error, exists) {
-                if (error) {
-                    console.log(error);
-                }
-
-                if (!exists) {
-                    console.log('Tweeting to', currentTweet.name);
-
-                    tweet(currentTweet);
-
-                    client.set('@' + currentTweet.name, '1');
-                    client.expire('@' + currentTweet.name, 3600 * 24 * 7);
-                } else {
-                    console.log('--');
-                    console.log('User blocked for 12 hours');
-                    console.log('--');
-                }
-            });
         }
     });
 };
