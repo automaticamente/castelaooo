@@ -104,8 +104,10 @@ var getNext = function() {
 
         if (reply) {
             var currentTweet = JSON.parse(reply);
-            tweet(currentTweet);
 
+            console.log('Tweeting to ' + reply.name);
+
+            tweet(currentTweet);
         }
     });
 };
