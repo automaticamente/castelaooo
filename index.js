@@ -105,7 +105,7 @@ var getNext = function() {
         if (reply) {
             var currentTweet = JSON.parse(reply);
 
-            console.log('Tweeting to ' + reply.name);
+            console.log('Tweeting to ' + currentTweet.name);
 
             tweet(currentTweet);
         }
