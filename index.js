@@ -8,6 +8,8 @@ var Twit = require('twit');
 var redis = require('redis'),
     client = redis.createClient();
 
+client.select(2);
+
 client.on('error', function(err) {
     console.log('Error ' + err);
 });
